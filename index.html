@@ -450,6 +450,10 @@
             stat.add("gauss blur");
             stat.add("canny edge");
         }
+        var start_pos_x = 0,
+            start_pos_y = 0,
+            end_pos_x = 0,
+            end_pos_y = 0;
 
         function tick() {
 
@@ -488,13 +492,20 @@
 
                 ctx.lineWidth = "2";
                 ctx.strokeStyle = "yellow";
-                ctx.rect((640 - 171) / 2, (480 - 108) / 2 + 100, 171, 108);
+                ctx.rect((640 - 171) / 2 - 10, (480 - 108) / 2 + 100, 171, 108);
                 ctx.stroke();
                 ctx.beginPath();
                 ctx.strokeStyle = "red";
                 ctx.moveTo(640 - (640 - 171) / 2, 300 + 108 / 2 + 5);
                 ctx.lineTo(640 - (640 - 171) / 2 + 100, 300 + 108 / 2 + 5);
                 ctx.stroke();
+
+                ctx.beginPath();
+                ctx.strokeStyle = "white";
+                ctx.moveTo(640 - start_pos_x, 300 + 108 / 2 + 5);
+                ctx.lineTo(640 - end_pos_x, 300 + 108 / 2 + 5);
+                ctx.stroke();
+
                 calc_size();
 
                 $('#log').html("<br>finger_diameter(mm): " + finger_diameter + "<br>Ring Size(USA): " + ring_size);
@@ -513,9 +524,11 @@
                     skin_started = true;
                     skin_start_pos = (i / 4) % 640;
                     skin_end_pos = skin_start_pos;
+                    start_pos_x = (i / 4) % 640;
                 }
                 if (skin_started && imgData[i] == 255 && (i / 4) % 640 - skin_start_pos < 60) {
                     skin_end_pos = (i / 4) % 640;
+                    end_pos_x = (i / 4) % 640;
                 }
             }
             console.log(skin_end_pos - skin_start_pos);
