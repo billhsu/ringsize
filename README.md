@@ -8,3 +8,5 @@ Online Ring Size Measurement
 2. Place you finger at the red line. Keep same distance away from the camera as the cerdit card.
 
 3. Voilà!
+
+*A clean background is preferred.. 
